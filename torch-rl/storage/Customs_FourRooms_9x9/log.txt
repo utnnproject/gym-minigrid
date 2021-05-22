@@ -1,0 +1,6 @@
+C:\Github\gym-minigrid\torch-rl\scripts\train.py --algo ppo --env MiniGrid-Customs-FourRooms-9x9-v0 --model Customs_FourRooms_9x9 --save-interval 10 --frames 80000
+
+Namespace(algo='ppo', batch_size=256, clip_eps=0.2, discount=0.99, entropy_coef=0.01, env='MiniGrid-Customs-FourRooms-9x9-v0', epochs=4, frames=80000, frames_per_proc=None, gae_lambda=0.95, log_interval=1, lr=0.001, max_grad_norm=0.5, mem=False, model='Customs_FourRooms_9x9', optim_alpha=0.99, optim_eps=1e-08, procs=16, recurrence=1, save_interval=10, seed=1, text=False, value_loss_coef=0.5)
+
+Device: cpu
+
