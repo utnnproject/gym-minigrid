@@ -1,0 +1,48 @@
+scp C:\HPC\Test\* handy89@@rocket.hpc.ut.ee:~/test
+
+scp -r handy89@@rocket.hpc.ut.ee:~/projects/gym-minigrid C:\HPC\
+
+scp -r handy89@@rocket.hpc.ut.ee:~/projects/gym-minigrid/torch-rl/storage C:\HPC\
+
+ssh handy89@rocket.hpc.ut.ee
+
+git clone https://github.com/utnnproject/stable-baselines3
+
+docker cp docker-gym-minigrid:root/gym-minigrid/torch-rl/storage C:\Github\gym-minigrid\torch-rl\
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRooms-9x9-v0 --model Lstm_Customs_FourRooms_9x9 --save-interval 10 --frames 600000 --recurrence 4
+python -m scripts.visualize --env MiniGrid-Customs-FourRooms-9x9-v0 --model Lstm_Customs_FourRooms_9x9 --memory
+
+python -m scripts.train --algo ppo --env MiniGrid-DoorKey-6x6-v0 --model MiniGrid-DoorKey-6x6-v0 --save-interval 10 --frames 800000
+python -m scripts.visualize --env MiniGrid-DoorKey-6x6-v0 --model MiniGrid-DoorKey-6x6-v0
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --recurrence 4 --save-interval 10 --frames 1000000
+python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory --gif lstm_fourroomlava
+python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory
+
+tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
+
+python -m scripts.train --env MiniGrid-Empty-8x8-v0 --algo ppo --model empty_8x8 --frames 800
+
+python -m torch-rl.scripts.visualize --env MiniGrid-Empty-8x8-v0 --model MiniGrid-Empty-8x8-v0_ppo_seed1_21-04-15-21-57-31
+
+python -m scripts.evaluate --env MiniGrid-Empty-8x8-v0 --model MiniGrid-Empty-8x8-v0_ppo_seed1_21-04-15-21-57-31
+
+python -m scripts.train --algo ppo --env MiniGrid-RedBlueDoors-6x6-v0 --model RedBlueDoors --recurrence 4 --save-interval 10 --frames 1000000
+
+
+python -m scripts.train --algo ppo --env MiniGrid-FourRooms-v0 --model RedBlueDoors --recurrence 4 --save-interval 20 --frames 1000000
+
+python3 -m scripts.train --algo ppo --env MiniGrid-FourRooms-v0 --model FourRooms --save-interval 10 --frames 500000
+
+python3 -m scripts.visualize --env MiniGrid-FourRooms-v0 --model RedBlueDoors
+
+python3 -m scripts.visualize --env MiniGrid-DoorKey-5x5-v0 --model DoorKey
+
+
+python3 -m scripts.evaluate --env MiniGrid-FourRooms-v0 --model FourRooms
+
+scp -r  C:\Users\handy89\mycar\data.zip handy89@@rocket.hpc.ut.ee:~/projects/donkey/mycar
+
+
+scp -r  C:\Users\handy89\job handy89@@rocket.hpc.ut.ee:~/projects/donkey/
