@@ -87,7 +87,7 @@ class NineRoomsLavaEnv16x16(MiniGridEnv):
         self._goal_default_pos = goal_pos
         self.numObjs = numObjs
         
-        super().__init__(grid_size=16, max_steps=100)
+        super().__init__(grid_size=16, max_steps=2000)
 
     def _gen_grid(self, width, height):
         # Create the grid
