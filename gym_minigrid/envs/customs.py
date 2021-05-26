@@ -202,6 +202,87 @@ class NineRoomsLavaEnv16x16(MiniGridEnv):
         
         return obs, reward, done, info
 
+class DoorKeyMaze9x9(MiniGridEnv):
+    """
+    Classic 4 rooms gridworld environment with lava to avoid.
+    Can specify agent and goal position, if not it set at random.
+    """
+
+    def __init__(self, agent_pos=(1,7), goal_pos=None, obstacle_type=None, numObjs=4):
+        self.obstacle_type = obstacle_type
+        self._agent_default_pos = agent_pos
+        self.numObjs = numObjs
+        
+        super().__init__(grid_size=9, max_steps=100)
+
+    def _gen_grid(self, width, height):
+        # Create the grid
+        self.grid = Grid(width, height)
+
+        types = ['lava']
+        
+
+        failure_pos = []
+        failure_pos.append((3,2))
+        goal_pos = (7,7)
+
+        self._goal_default_pos = goal_pos
+        self.failure_pos = failure_pos
+        
+        # Generate the surrounding walls
+        self.grid.horz_wall(0, 0)
+        self.grid.horz_wall(0, height - 1)
+        self.grid.vert_wall(0, 0)
+        self.grid.vert_wall(width - 1, 0)
+
+        self.grid.horz_wall(3, 3, 1)
+        self.grid.horz_wall(3, 6, 1)
+        
+        self.grid.vert_wall(4, 1, 6)
+        self.grid.vert_wall(6, 2, 7)
+        self.grid.vert_wall(2, 2, 2)
+        self.grid.vert_wall(2, 5, 2)
+
+
+        # Place a door in the wall
+        self.put_obj(Door('yellow', is_locked=True), 4, 4)
+        self.put_obj(Door('yellow', is_locked=True), 6, 4)
+
+        # Place a yellow key on the left side
+        self.place_obj(
+            obj=Key('yellow'),
+            top=(0, 0),
+            size=(4, 6)
+        )
+
+        # Randomize the player start position and orientation
+        if self._agent_default_pos is not None:
+            self.agent_pos = self._agent_default_pos
+            self.grid.set(*self._agent_default_pos, None)
+            self.agent_dir = self._rand_int(0, 4)  # assuming random start direction
+        else:
+            self.place_agent()
+
+        if self._goal_default_pos is not None:
+            goal = Goal()
+            self.put_obj(goal, *self._goal_default_pos)
+            goal.init_pos, goal.cur_pos = self._goal_default_pos
+        else:
+            self.place_obj(Goal())
+
+        
+        self.mission = (
+            "Get to the green goal square"
+        )
+
+    def step(self, action):
+        obs, reward, done, info = MiniGridEnv.step(self, action)
+        
+        if tuple(self.agent_pos) in self.failure_pos:
+            self.step_count += 10
+        
+        return obs, reward, done, info
+
 class Maze13x13(MiniGridEnv):
     """
     Classic 4 rooms gridworld environment with lava to avoid.
@@ -751,5 +832,11 @@ register(
     id='MiniGrid-Customs-Maze-13x13-v0',
     entry_point='gym_minigrid.envs:Maze13x13'
 )
+
+register(
+    id='MiniGrid-Customs-DoorKeyMaze-9x9-v0',
+    entry_point='gym_minigrid.envs:DoorKeyMaze9x9'
+)
+
 
 
