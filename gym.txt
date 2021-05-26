@@ -21,9 +21,13 @@ python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-13x13-v0
 python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory --gif lstm_fourroomlava
 python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory --gif lstm_fourroomlava
+python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --recurrence 4 --save-interval 10 --frames 1500000
+python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory --gif lstm_fourroomlava11x11
 python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-9x9 --recurrence 4 --save-interval 10 --frames 20000000
+python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-9x9 --memory --gif lstm_fourroomlava9x9
+python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory
 
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 

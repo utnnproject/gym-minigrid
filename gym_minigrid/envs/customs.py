@@ -75,19 +75,19 @@ class FourRoomsEnv9x9(MiniGridEnv):
 
 
 
-class FourRoomsLavaEnv13x13(MiniGridEnv):
+class NineRoomsLavaEnv16x16(MiniGridEnv):
     """
     Classic 4 rooms gridworld environment with lava to avoid.
     Can specify agent and goal position, if not it set at random.
     """
 
-    def __init__(self, agent_pos=None, goal_pos=None, obstacle_type=Lava, numObjs=4):
+    def __init__(self, agent_pos=(2,2), goal_pos=(13,13), obstacle_type=Lava, numObjs=4):
         self.obstacle_type = obstacle_type
         self._agent_default_pos = agent_pos
         self._goal_default_pos = goal_pos
         self.numObjs = numObjs
         
-        super().__init__(grid_size=13, max_steps=1000)
+        super().__init__(grid_size=16, max_steps=100)
 
     def _gen_grid(self, width, height):
         # Create the grid
@@ -115,7 +115,7 @@ class FourRoomsLavaEnv13x13(MiniGridEnv):
         #     idx += 1
         
         # random the number of lavas
-        noOfLavas = random.randint(5,12)
+        noOfLavas = random.randint(3,6)
 
         for i in range(0, noOfLavas):
             obj = Lava()
@@ -128,29 +128,32 @@ class FourRoomsLavaEnv13x13(MiniGridEnv):
         self.grid.vert_wall(0, 0)
         self.grid.vert_wall(width - 1, 0)
 
-        room_w = width // 2
-        room_h = height // 2
+        room_w = width // 3
+        room_h = height // 3
 
         # For each row of rooms
-        for j in range(0, 2):
+        for j in range(0, 3):
 
             # For each column
-            for i in range(0, 2):
+            for i in range(0, 3):
                 xL = i * room_w
                 yT = j * room_h
                 xR = xL + room_w
                 yB = yT + room_h
 
+                hor = self._rand_int(yT + 1, yB)
+
+                ver = self._rand_int(xL + 1, xR)
                 # Bottom wall and door
-                if i + 1 < 2:
+                if i + 1 < 3:
                     self.grid.vert_wall(xR, yT, room_h)
-                    pos = (xR, self._rand_int(yT + 1, yB))
+                    pos = (xR, hor)
                     self.grid.set(*pos, None)
 
                 # Bottom wall and door
-                if j + 1 < 2:
+                if j + 1 < 3:
                     self.grid.horz_wall(xL, yB, room_w)
-                    pos = (self._rand_int(xL + 1, xR), yB)
+                    pos = (ver, yB)
                     self.grid.set(*pos, None)
 
         # Randomize the player start position and orientation
@@ -464,8 +467,8 @@ register(
 )
 
 register(
-    id='MiniGrid-Customs-FourRoomsLava-13x13-v0',
-    entry_point='gym_minigrid.envs:FourRoomsLavaEnv13x13'
+    id='MiniGrid-Customs-NineRoomsLava-16x16-v0',
+    entry_point='gym_minigrid.envs:NineRoomsLavaEnv16x16'
 )
 register(
     id='MiniGrid-Customs-FourRoomsLava-11x11-v0',
