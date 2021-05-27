@@ -642,6 +642,12 @@ class MiniGridEnv(gym.Env):
         # Done completing task
         done = 6
 
+        # Time Travel - move back x steps
+        timetravel_5 = 7
+        timetravel_8 = 8
+        timetravel_10 = 10
+
+
     def __init__(
         self,
         grid_size=None,
@@ -663,6 +669,10 @@ class MiniGridEnv(gym.Env):
 
         # Actions are discrete integer values
         self.action_space = spaces.Discrete(len(self.actions))
+
+        # Keep the last 10 agent position
+        self.agent_position_history = []
+        self.agent_direction_history = []
 
         # Number of cells (width and height) in the agent view
         assert agent_view_size % 2 == 1
@@ -1099,6 +1109,13 @@ class MiniGridEnv(gym.Env):
     def step(self, action):
         self.step_count += 1
 
+        if len(self.agent_position_history) > 9:
+            self.agent_position_history.pop(0)
+            self.agent_direction_history.pop(0)
+
+        self.agent_position_history.append(self.agent_pos)
+        self.agent_direction_history.append(self.agent_dir)
+
         reward = 0
         done = False
 
@@ -1151,6 +1168,68 @@ class MiniGridEnv(gym.Env):
         # Done action (not used by default)
         elif action == self.actions.done:
             pass
+
+        # Time Travel - travel back to x times
+        elif action == self.actions.timetravel_5:
+            backward_steps = 5
+
+            len_history = len(self.agent_position_history)
+            if len_history  <= backward_steps:
+                self.agent_pos = self.agent_position_history[0]    
+                self.agent_dir = self.agent_direction_history[0]
+
+                self.agent_position_history.clear()
+                self.agent_direction_history.clear()
+            else:
+                self.agent_pos = self.agent_position_history[len_history - backward_steps]    
+                self.agent_dir = self.agent_direction_history[len_history - backward_steps]
+
+                for i in range(0,backward_steps):
+                    self.agent_position_history.pop()
+                    self.agent_direction_history.pop()
+
+            print("Backward {0} steps".format(backward_steps))
+            
+
+        elif action == self.actions.timetravel_8:
+            backward_steps = 8
+
+            len_history = len(self.agent_position_history)
+            if len_history  <= backward_steps:
+                self.agent_pos = self.agent_position_history[0]    
+                self.agent_dir = self.agent_direction_history[0]
+
+                self.agent_position_history.clear()
+                self.agent_direction_history.clear()
+            else:
+                self.agent_pos = self.agent_position_history[len_history - backward_steps]    
+                self.agent_dir = self.agent_direction_history[len_history - backward_steps]
+
+                for i in range(0,backward_steps):
+                    self.agent_position_history.pop()
+                    self.agent_direction_history.pop()
+
+            print("Backward {0} steps".format(backward_steps))
+
+        elif action == self.actions.timetravel_10:
+            backward_steps = 10
+
+            len_history = len(self.agent_position_history)
+            if len_history  <= backward_steps:
+                self.agent_pos = self.agent_position_history[0]    
+                self.agent_dir = self.agent_direction_history[0]
+
+                self.agent_position_history.clear()
+                self.agent_direction_history.clear()
+            else:
+                self.agent_pos = self.agent_position_history[len_history - backward_steps]    
+                self.agent_dir = self.agent_direction_history[len_history - backward_steps]
+
+                for i in range(0,backward_steps):
+                    self.agent_position_history.pop()
+                    self.agent_direction_history.pop()
+
+            print("Backward {0} steps".format(backward_steps))
 
         else:
             assert False, "unknown action"

@@ -30,7 +30,10 @@ python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model 
 python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-Maze-13x13-v0 --model Lstm-Customs-Maze-13x13-v0 --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-Maze-13x13-v0 --model Lstm-Customs-Maze-13x13-v0 --memory --gif lstm_fourroomlava9x9
+python -m scripts.visualize --env MiniGrid-Customs-Maze-13x13-v0 --model Lstm-Customs-Maze-13x13-v0 --memory --gif lstm_maze13x13
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Lstm-Customs-DoorKeyMaze-9x9-v0 --recurrence 4 --save-interval 10 --frames 1000000
+python -m scripts.visualize --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Lstm-Customs-DoorKeyMaze-9x9-v0 --memory --gif lstm_maze9x9
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-NineRoomsLava-16x16-v0 --model Lstm-Customs-NineRoomsLava-16x16 --recurrence 4 --save-interval 10 --frames 20000000
 
