@@ -671,8 +671,8 @@ class MiniGridEnv(gym.Env):
         self.action_space = spaces.Discrete(len(self.actions))
 
         # Keep the last 10 agent position
-        self.agent_position_history = [self.agent_pos]
-        self.agent_direction_history = [self.agent_dir]
+        self.agent_position_history = []
+        self.agent_direction_history = []
 
         # Number of cells (width and height) in the agent view
         assert agent_view_size % 2 == 1
@@ -1112,6 +1112,13 @@ class MiniGridEnv(gym.Env):
         reward = 0
         done = False
 
+        if len(self.agent_position_history) > 9:
+            self.agent_position_history.pop(0)
+            self.agent_direction_history.pop(0)
+
+        self.agent_position_history.append(self.agent_pos)
+        self.agent_direction_history.append(self.agent_dir)
+
         # Get the position in front of the agent
         fwd_pos = self.front_pos
 
@@ -1137,14 +1144,6 @@ class MiniGridEnv(gym.Env):
                 reward = self._reward()
             if fwd_cell != None and fwd_cell.type == 'lava':
                 done = True
-
-            if len(self.agent_position_history) > 9:
-                self.agent_position_history.pop(0)
-                self.agent_direction_history.pop(0)
-
-            self.agent_position_history.append(self.agent_pos)
-            self.agent_direction_history.append(self.agent_dir)
-            
 
         # Pick up an object
         elif action == self.actions.pickup:
@@ -1172,7 +1171,7 @@ class MiniGridEnv(gym.Env):
 
         # Time Travel - travel back to x times
         elif action == self.actions.timetravel_5:
-            backward_steps = 4
+            backward_steps = 5
 
             len_history = len(self.agent_position_history)
             if len_history  <= backward_steps:
