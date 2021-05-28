@@ -217,7 +217,7 @@ class SimpleCorridor(MiniGridEnv):
         self.grid = Grid(width, height)
         
 
-        self._agent_default_pos = (15 + self._rand_int(0, 4), 10 + self._rand_int(0, 2))
+        self._agent_default_pos = (13 + self._rand_int(0, 8), 10 + self._rand_int(0, 2))
 
         # random goal type
         goalType = self._rand_int(1, 4)
