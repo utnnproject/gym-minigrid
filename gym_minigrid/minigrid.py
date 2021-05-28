@@ -1109,13 +1109,6 @@ class MiniGridEnv(gym.Env):
     def step(self, action):
         self.step_count += 1
 
-        if len(self.agent_position_history) > 9:
-            self.agent_position_history.pop(0)
-            self.agent_direction_history.pop(0)
-
-        self.agent_position_history.append(self.agent_pos)
-        self.agent_direction_history.append(self.agent_dir)
-
         reward = 0
         done = False
 
@@ -1145,6 +1138,14 @@ class MiniGridEnv(gym.Env):
             if fwd_cell != None and fwd_cell.type == 'lava':
                 done = True
 
+            if len(self.agent_position_history) > 9:
+                self.agent_position_history.pop(0)
+                self.agent_direction_history.pop(0)
+
+            self.agent_position_history.append(self.agent_pos)
+            self.agent_direction_history.append(self.agent_dir)
+            
+
         # Pick up an object
         elif action == self.actions.pickup:
             if fwd_cell and fwd_cell.can_pickup():
@@ -1171,7 +1172,7 @@ class MiniGridEnv(gym.Env):
 
         # Time Travel - travel back to x times
         elif action == self.actions.timetravel_5:
-            backward_steps = 8
+            backward_steps = 4
 
             len_history = len(self.agent_position_history)
             if len_history  <= backward_steps:

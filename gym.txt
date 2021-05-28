@@ -37,6 +37,11 @@ python -m scripts.visualize --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Ls
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-NineRoomsLava-16x16-v0 --model Lstm-Customs-NineRoomsLava-16x16 --recurrence 4 --save-interval 10 --frames 20000000
 
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --recurrence 4 --save-interval 10 --frames 500000
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v1 --memory --gif lstm_corridor
+
+
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 
 python -m scripts.train --env MiniGrid-Empty-8x8-v0 --algo ppo --model empty_8x8 --frames 800
