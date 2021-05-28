@@ -671,8 +671,8 @@ class MiniGridEnv(gym.Env):
         self.action_space = spaces.Discrete(len(self.actions))
 
         # Keep the last 10 agent position
-        self.agent_position_history = []
-        self.agent_direction_history = []
+        self.agent_position_history = [self.agent_pos]
+        self.agent_direction_history = [self.agent_dir]
 
         # Number of cells (width and height) in the agent view
         assert agent_view_size % 2 == 1
@@ -1181,6 +1181,9 @@ class MiniGridEnv(gym.Env):
 
                 self.agent_position_history.clear()
                 self.agent_direction_history.clear()
+
+                self.agent_position_history.append(self.agent_pos)
+                self.agent_direction_history.append(self.agent_dir)
             else:
                 self.agent_pos = self.agent_position_history[len_history - backward_steps]    
                 self.agent_dir = self.agent_direction_history[len_history - backward_steps]
