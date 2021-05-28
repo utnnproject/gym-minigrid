@@ -217,7 +217,7 @@ class SimpleCorridor(MiniGridEnv):
         self.grid = Grid(width, height)
         
 
-        self._agent_default_pos = (13 + self._rand_int(0, 8), 10 + self._rand_int(0, 2))
+        self._agent_default_pos = (12 + self._rand_int(0, 8), 10 + self._rand_int(0, 2))
 
         # random goal type
         goalType = self._rand_int(1, 4)
@@ -225,7 +225,7 @@ class SimpleCorridor(MiniGridEnv):
         self.goal_type = goalType
 
         if (goalType == 1):
-            goal_pos = (1,10 + self._rand_int(0, 2))
+            goal_pos = (5,10 + self._rand_int(0, 2))
         elif (goalType == 2):
             goal_pos = (18 + self._rand_int(0, 2), 1 )
         elif (goalType == 3):
@@ -238,10 +238,10 @@ class SimpleCorridor(MiniGridEnv):
         # Generate the surrounding walls
         
 
-        self.grid.horz_wall(0, 9, 17)
-        self.grid.horz_wall(0, 12, 17)
+        self.grid.horz_wall(4, 9, 13)
+        self.grid.horz_wall(4, 12, 13)
         
-        self.grid.vert_wall(0, 9, 3)
+        self.grid.vert_wall(4, 9, 3)
 
         self.grid.vert_wall(17, 0, 10)
         self.grid.vert_wall(17, 12, 10)
