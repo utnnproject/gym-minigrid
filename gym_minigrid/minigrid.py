@@ -644,7 +644,7 @@ class MiniGridEnv(gym.Env):
 
         # Time Travel - move back x steps
         timetravel_5 = 7
-        timetravel_8 = 8
+        # timetravel_8 = 8
         # timetravel_10 = 9
 
 
@@ -1194,24 +1194,24 @@ class MiniGridEnv(gym.Env):
             #print("Backward {0} steps".format(backward_steps))
             
 
-        elif action == self.actions.timetravel_8:
-            backward_steps = 16
+        # elif action == self.actions.timetravel_8:
+        #     backward_steps = 16
 
-            len_history = len(self.agent_position_history)
-            if len_history >= backward_steps - 3:
-                if len_history  <= backward_steps:
-                    self.agent_pos = self.agent_position_history[0]    
-                    self.agent_dir = self.agent_direction_history[0]
+        #     len_history = len(self.agent_position_history)
+        #     if len_history >= backward_steps - 3:
+        #         if len_history  <= backward_steps:
+        #             self.agent_pos = self.agent_position_history[0]    
+        #             self.agent_dir = self.agent_direction_history[0]
 
-                    self.agent_position_history.clear()
-                    self.agent_direction_history.clear()
-                else:
-                    self.agent_pos = self.agent_position_history[len_history - backward_steps]    
-                    self.agent_dir = self.agent_direction_history[len_history - backward_steps]
+        #             self.agent_position_history.clear()
+        #             self.agent_direction_history.clear()
+        #         else:
+        #             self.agent_pos = self.agent_position_history[len_history - backward_steps]    
+        #             self.agent_dir = self.agent_direction_history[len_history - backward_steps]
 
-                    for i in range(0,backward_steps):
-                        self.agent_position_history.pop()
-                        self.agent_direction_history.pop()
+        #             for i in range(0,backward_steps):
+        #                 self.agent_position_history.pop()
+        #                 self.agent_direction_history.pop()
 
             #print("Backward {0} steps".format(backward_steps))
 

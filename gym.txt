@@ -11,6 +11,7 @@ rm -r gym-minigrid
 git clone https://github.com/utnnproject/gym-minigrid
 cd gym-minigrid/torch-rl
 
+
 git clone https://github.com/utnnproject/stable-baselines3
 
 docker cp docker-gym-minigrid:root/gym-minigrid/torch-rl/storage C:\Github\gym-minigrid\torch-rl\
@@ -41,12 +42,12 @@ python -m scripts.visualize --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Ls
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-NineRoomsLava-16x16-v0 --model Lstm-Customs-NineRoomsLava-16x16 --recurrence 4 --save-interval 10 --frames 20000000
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --recurrence 4 --save-interval 10 --frames 500000
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --recurrence 4 --save-interval 10 --frames 50000000
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor_1m
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor_2m
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0 --recurrence 4 --save-interval 10 --frames 500000
-
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0 --memory --gif lstm_corridor16x16_500
 
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 
