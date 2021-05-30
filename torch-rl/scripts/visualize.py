@@ -73,6 +73,8 @@ for episode in range(args.episodes):
             frames.append(numpy.moveaxis(env.render("rgb_array"), 2, 0))
 
         action = agent.get_action(obs)
+        if(action == 7):
+            print("this is time travel")
         obs, reward, done, _ = env.step(action)
         agent.analyze_feedback(reward, done)
 
