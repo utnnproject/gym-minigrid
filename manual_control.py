@@ -76,9 +76,9 @@ def key_handler(event):
     if event.key == '1':
         step(env.actions.timetravel_5)
         return
-    # if event.key == '2':
-    #     step(env.actions.timetravel_8)
-    #     return
+    if event.key == '2':
+        step(env.actions.timetravel_8)
+        return
     # if event.key == '3':
     #     step(env.actions.timetravel_10)
     #     return

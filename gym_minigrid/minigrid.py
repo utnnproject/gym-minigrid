@@ -645,7 +645,7 @@ class MiniGridEnv(gym.Env):
         # Time Travel - move back x steps
         timetravel_5 = 7
         timetravel_8 = 8
-        timetravel_10 = 9
+        # timetravel_10 = 9
 
 
     def __init__(
@@ -1172,10 +1172,10 @@ class MiniGridEnv(gym.Env):
 
         # Time Travel - travel back to x times
         elif action == self.actions.timetravel_5:
-            backward_steps = 5
+            backward_steps = 3
 
             len_history = len(self.agent_position_history)
-            if len_history >= 3:
+            if len_history >= 1:
                 if len_history  <= backward_steps:
                     self.agent_pos = self.agent_position_history[0]    
                     self.agent_dir = self.agent_direction_history[0]
@@ -1215,24 +1215,24 @@ class MiniGridEnv(gym.Env):
 
             #print("Backward {0} steps".format(backward_steps))
 
-        elif action == self.actions.timetravel_10:
-            backward_steps = 11
+        # elif action == self.actions.timetravel_10:
+        #     backward_steps = 11
 
-            len_history = len(self.agent_position_history)
-            if len_history >= 8:
-                if len_history  <= backward_steps:
-                    self.agent_pos = self.agent_position_history[0]    
-                    self.agent_dir = self.agent_direction_history[0]
+        #     len_history = len(self.agent_position_history)
+        #     if len_history >= 8:
+        #         if len_history  <= backward_steps:
+        #             self.agent_pos = self.agent_position_history[0]    
+        #             self.agent_dir = self.agent_direction_history[0]
 
-                    self.agent_position_history.clear()
-                    self.agent_direction_history.clear()
-                else:
-                    self.agent_pos = self.agent_position_history[len_history - backward_steps]    
-                    self.agent_dir = self.agent_direction_history[len_history - backward_steps]
+        #             self.agent_position_history.clear()
+        #             self.agent_direction_history.clear()
+        #         else:
+        #             self.agent_pos = self.agent_position_history[len_history - backward_steps]    
+        #             self.agent_dir = self.agent_direction_history[len_history - backward_steps]
 
-                    for i in range(0,backward_steps):
-                        self.agent_position_history.pop()
-                        self.agent_direction_history.pop()
+        #             for i in range(0,backward_steps):
+        #                 self.agent_position_history.pop()
+        #                 self.agent_direction_history.pop()
 
         #     #print("Backward {0} steps".format(backward_steps))
 
@@ -1245,7 +1245,6 @@ class MiniGridEnv(gym.Env):
         if done == True:
             self.agent_position_history.clear()
             self.agent_direction_history.clear()
-            print("==================================")
 
         obs = self.gen_obs()
 
