@@ -284,7 +284,7 @@ class SimpleCorridor16x16(MiniGridEnv):
         self._agent_default_pos = agent_pos
         self.numObjs = numObjs
         
-        super().__init__(grid_size=16, max_steps=100)
+        super().__init__(grid_size=16, max_steps=100, agent_view_size=3)
 
     def _gen_grid(self, width, height):
         # Create the grid
@@ -357,8 +357,9 @@ class SimpleCorridor18x18(MiniGridEnv):
         self.obstacle_type = obstacle_type
         self._agent_default_pos = agent_pos
         self.numObjs = numObjs
+        self.goal_type = 0
         
-        super().__init__(grid_size=18, max_steps=100)
+        super().__init__(grid_size=18, max_steps=100, agent_view_size=3)
 
     def _gen_grid(self, width, height):
         # Create the grid
@@ -366,17 +367,19 @@ class SimpleCorridor18x18(MiniGridEnv):
         
         agent_pos = (6 + self._rand_int(0, 8), 8 + self._rand_int(0, 2))
         
+        
 
         # random goal type
-        goalType = self._rand_int(1, 4)
+        goalType = (self.goal_type + 1) % 3 
+
         
         self.goal_type = goalType
 
-        if (goalType == 1):
+        if (goalType == 0):
             goal_pos = (1, 8 + self._rand_int(0, 2))
-        elif (goalType == 2):
+        elif (goalType == 1):
             goal_pos = (13 + self._rand_int(0, 2), 1 )
-        elif (goalType == 3):
+        elif (goalType == 2):
             goal_pos = (13 + self._rand_int(0, 2),16)
 
 

@@ -1142,6 +1142,7 @@ class MiniGridEnv(gym.Env):
             if fwd_cell != None and fwd_cell.type == 'goal':
                 done = True
                 reward = self._reward()
+                print(self._reward())
             if fwd_cell != None and fwd_cell.type == 'lava':
                 done = True
 
@@ -1241,10 +1242,11 @@ class MiniGridEnv(gym.Env):
 
         if self.step_count >= self.max_steps:
             done = True
-
+            
         if done == True:
             self.agent_position_history.clear()
             self.agent_direction_history.clear()
+            print("==================================")
 
         obs = self.gen_obs()
 
