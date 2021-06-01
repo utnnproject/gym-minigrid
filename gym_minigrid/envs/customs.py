@@ -209,46 +209,52 @@ class SimpleCorridor(MiniGridEnv):
         self.obstacle_type = obstacle_type
         self._agent_default_pos = agent_pos
         self.numObjs = numObjs
-        
-        super().__init__(grid_size=22, max_steps=100)
+        self.goal_type = 0
+
+        super().__init__(grid_size=25, max_steps=200)
 
     def _gen_grid(self, width, height):
         # Create the grid
         self.grid = Grid(width, height)
         
 
-        self._agent_default_pos = (12 + self._rand_int(0, 8), 10 + self._rand_int(0, 2))
+        self._agent_default_pos = (6 + self._rand_int(0, 12), 12 + self._rand_int(0, 2))
 
         # random goal type
-        goalType = self._rand_int(1, 4)
+        goalType = (self.goal_type + 1) % 4 
+
         
         self.goal_type = goalType
 
-        if (goalType == 1):
-            goal_pos = (5,10 + self._rand_int(0, 2))
+        if (goalType == 0):
+            goal_pos = (4 + self._rand_int(0, 2), 1)
+        elif (goalType == 1):
+            goal_pos = (18 + self._rand_int(0, 2), 1)
         elif (goalType == 2):
-            goal_pos = (18 + self._rand_int(0, 2), 1 )
+            goal_pos = (4 + self._rand_int(0, 2), 23)
         elif (goalType == 3):
-            goal_pos = (18 + self._rand_int(0, 2),20)
-
-        self._goal_default_pos = goal_pos
-
-        self._goal_default_pos = goal_pos
+            goal_pos = (18 + self._rand_int(0, 2), 23)
         
+        self._goal_default_pos = goal_pos
+
+
         # Generate the surrounding walls
-        
+        self.grid.horz_wall(3, 0, 3)
+        self.grid.horz_wall(3, 24, 3)
+        self.grid.vert_wall(3, 0, 25)
 
-        self.grid.horz_wall(4, 9, 13)
-        self.grid.horz_wall(4, 12, 13)
-        
-        self.grid.vert_wall(4, 9, 3)
+        self.grid.vert_wall(6, 0, 12)
+        self.grid.vert_wall(6, 14, 11)
 
-        self.grid.vert_wall(17, 0, 10)
-        self.grid.vert_wall(17, 12, 10)
+        self.grid.horz_wall(7, 11, 10)
+        self.grid.horz_wall(7, 14, 10)
+
+        self.grid.vert_wall(17, 0, 12)
+        self.grid.vert_wall(17, 14, 10)
 
         self.grid.horz_wall(17, 0, 3)
-        self.grid.horz_wall(17, 21, 3)
-        self.grid.vert_wall(20, 0, 22)
+        self.grid.horz_wall(17, 24, 3)
+        self.grid.vert_wall(20, 0, 25)
         
 
         # Randomize the player start position and orientation
@@ -284,7 +290,7 @@ class SimpleCorridor16x16(MiniGridEnv):
         self._agent_default_pos = agent_pos
         self.numObjs = numObjs
         
-        super().__init__(grid_size=16, max_steps=100, agent_view_size=3)
+        super().__init__(grid_size=16, max_steps=100, agent_view_size=7)
 
     def _gen_grid(self, width, height):
         # Create the grid
@@ -359,7 +365,7 @@ class SimpleCorridor18x18(MiniGridEnv):
         self.numObjs = numObjs
         self.goal_type = 0
         
-        super().__init__(grid_size=18, max_steps=100, agent_view_size=3)
+        super().__init__(grid_size=18, max_steps=100, agent_view_size=7)
 
     def _gen_grid(self, width, height):
         # Create the grid

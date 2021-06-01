@@ -47,12 +47,16 @@ python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lst
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor_2m
 
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_10M --recurrence 4 --save-interval 10 --frames 10000000
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_10M --memory --gif lstm_corridor16x16_10M
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_1M --recurrence 4 --save-interval 10 --frames 1000000
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_1M --memory --gif lstm_corridor16x16_10M
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_15M --recurrence 4 --save-interval 10 --frames 15000000
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_15M --memory --gif lstm_corridor18x18_15M
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_15M --memory
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor18x18-v0 -b-model SimpleCorridor18x18_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory --gif SimpleCorridor18x18_5M_v3x3
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 -b-model SimpleCorridor_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
+
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_30M --memory --gif lstm_corridor18x18_30M
 
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 
