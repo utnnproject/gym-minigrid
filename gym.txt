@@ -54,7 +54,17 @@ python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor18x18-v0
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory --gif SimpleCorridor18x18_5M_v3x3
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.96
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_v3x3 --memory --gif SimpleCorridor_5M_v3x3
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_r16 --recurrence 16 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.99
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_r16 --memory --gif SimpleCorridor_5M_r16
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_10M_2 --recurrence 4 --save-interval 10 --frames 10000000 --lr 0.0003 --discount 0.95
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_10M_2 --memory --gif SimpleCorridor_10M_22
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_20M_r8 --recurrence 8 --save-interval 10 --frames 20000000 --lr 0.0003 --discount 0.96
+python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_20M_r8 --memory --gif SimpleCorridor_20M_r8
 
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_30M --memory --gif lstm_corridor18x18_30M
 

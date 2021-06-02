@@ -371,7 +371,7 @@ class SimpleCorridor18x18(MiniGridEnv):
         # Create the grid
         self.grid = Grid(width, height)
         
-        agent_pos = (6 + self._rand_int(0, 8), 8 + self._rand_int(0, 2))
+        agent_pos = (6 + random.randint(0, 7), 8 + random.randint(0, 2))
         
         
 
@@ -407,6 +407,71 @@ class SimpleCorridor18x18(MiniGridEnv):
         self.grid.horz_wall(12, 17, 3)
         self.grid.vert_wall(15, 0, 18)
         
+
+        # Randomize the player start position and orientation
+        if self._agent_default_pos is not None:
+            self.agent_pos = self._agent_default_pos
+            self.grid.set(*self._agent_default_pos, None)
+            self.agent_dir = self._rand_int(0, 4)  # assuming random start direction
+        else:
+            self.place_agent()
+
+        if self._goal_default_pos is not None:
+            goal = Goal()
+            self.put_obj(goal, *self._goal_default_pos)
+            goal.init_pos, goal.cur_pos = self._goal_default_pos
+        else:
+            self.place_obj(Goal())
+
+        
+        self.mission = (
+            "Get to the green goal square"
+        )
+
+    def step(self, action):
+        obs, reward, done, info = MiniGridEnv.step(self, action)
+        
+        return obs, reward, done, info
+
+class LineCorridor(MiniGridEnv):
+    
+
+    def __init__(self, agent_pos=None, goal_pos=None, obstacle_type=None, numObjs=4):
+        self.obstacle_type = obstacle_type
+        self._agent_default_pos = agent_pos
+        self.numObjs = numObjs
+        self.goal_type = 0
+
+        super().__init__(grid_size=22, max_steps=100)
+
+    def _gen_grid(self, width, height):
+        # Create the grid
+        self.grid = Grid(width, height)
+        
+
+        self._agent_default_pos = (10 + random.randint(0, 2), 10 + random.randint(0, 1))
+
+        # random goal type
+        goalType = (self.goal_type + 1) % 2 
+
+        
+        self.goal_type = goalType
+
+        if (goalType == 0):
+            goal_pos = (1, 10 + random.randint(0, 1))
+        elif (goalType == 1):
+            goal_pos = (20, 10 + random.randint(0, 1))
+
+        
+        self._goal_default_pos = goal_pos
+
+
+        # Generate the surrounding walls
+        self.grid.horz_wall(0, 9, 22)
+        self.grid.horz_wall(0, 12, 22)
+        self.grid.vert_wall(0, 9, 4)
+        self.grid.vert_wall(21, 9, 4)
+
 
         # Randomize the player start position and orientation
         if self._agent_default_pos is not None:
@@ -1001,6 +1066,11 @@ register(
 register(
     id='MiniGrid-Customs-SimpleCorridor18x18-v0',
     entry_point='gym_minigrid.envs:SimpleCorridor18x18'
+)
+
+register(
+    id='MiniGrid-Customs-LineCorridor-v0',
+    entry_point='gym_minigrid.envs:LineCorridor'
 )
 
 
