@@ -1175,7 +1175,7 @@ class MiniGridEnv(gym.Env):
             backward_steps = 10
 
             len_history = len(self.agent_position_history)
-            if len_history >= 5:
+            if len_history >= 2:
                 if len_history  <= backward_steps:
                     self.agent_pos = self.agent_position_history[0]    
                     self.agent_dir = self.agent_direction_history[0]
