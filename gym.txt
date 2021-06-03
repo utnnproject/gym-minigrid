@@ -16,87 +16,22 @@ git clone https://github.com/utnnproject/stable-baselines3
 
 docker cp docker-gym-minigrid:root/gym-minigrid/torch-rl/storage C:\Github\gym-minigrid\torch-rl\
 
-python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRooms-9x9-v0 --model Lstm_Customs_FourRooms_9x9 --save-interval 10 --frames 600000 --recurrence 4
-python -m scripts.visualize --env MiniGrid-Customs-FourRooms-9x9-v0 --model Lstm_Customs_FourRooms_9x9 --memory
-
-python -m scripts.train --algo ppo --env MiniGrid-DoorKey-6x6-v0 --model MiniGrid-DoorKey-6x6-v0 --save-interval 10 --frames 800000
-python -m scripts.visualize --env MiniGrid-DoorKey-6x6-v0 --model MiniGrid-DoorKey-6x6-v0
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory --gif lstm_fourroomlava
-python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-13x13-v0 --model MiniGrid-Customs-FourRoomsLava-13x13-v0 --memory
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --recurrence 4 --save-interval 10 --frames 1500000
-python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory --gif lstm_fourroomlava11x11
-python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-11x11-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-9x9 --recurrence 4 --save-interval 10 --frames 20000000
-python -m scripts.visualize --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-9x9 --memory --gif lstm_fourroomlava9x9
-python -m scripts.evaluate --env MiniGrid-Customs-FourRoomsLava-9x9-v0 --model Lstm-Customs-FourRoomsLava-11x11 --memory
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-Maze-13x13-v0 --model Lstm-Customs-Maze-13x13-v0 --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-Maze-13x13-v0 --model Lstm-Customs-Maze-13x13-v0 --memory --gif lstm_maze13x13
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Lstm-Customs-DoorKeyMaze-9x9-v0 --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-DoorKeyMaze-9x9-v0 --model Lstm-Customs-DoorKeyMaze-9x9-v0 --memory --gif lstm_maze9x9
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-NineRoomsLava-16x16-v0 --model Lstm-Customs-NineRoomsLava-16x16 --recurrence 4 --save-interval 10 --frames 20000000
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --recurrence 4 --save-interval 10 --frames 50000000
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor_1m
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model Lstm-Customs-SimpleCorridor-v0 --memory --gif lstm_corridor_2m
-
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_1M --recurrence 4 --save-interval 10 --frames 1000000
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor16x16-v0 --model Lstm-Customs-SimpleCorridor16x16-v0_1M --memory --gif lstm_corridor16x16_10M
-
 python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor18x18-v0 -b-model SimpleCorridor18x18_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory --gif SimpleCorridor18x18_5M_v3x3
 python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model SimpleCorridor18x18_5M_v3x3 --memory
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_v3x3 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.96
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_v3x3 --memory --gif SimpleCorridor_5M_v3x3
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_r16 --recurrence 16 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.99
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_5M_r16 --memory --gif SimpleCorridor_5M_r16
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_10M_2 --recurrence 4 --save-interval 10 --frames 10000000 --lr 0.0003 --discount 0.95
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_10M_2 --memory --gif SimpleCorridor_10M_2
-
-python -m scripts.train --algo ppo --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_20M_r8 --recurrence 8 --save-interval 10 --frames 20000000 --lr 0.0003 --discount 0.96
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor-v0 --model SimpleCorridor_20M_r8 --memory --gif SimpleCorridor_20M_r8
-
-python -m scripts.visualize --env MiniGrid-Customs-SimpleCorridor18x18-v0 --model Lstm-Customs-SimpleCorridor18x18-v0_30M --memory --gif lstm_corridor18x18_30M
-
 =====================================================
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_5M_r4_v4x4 --recurrence 4 --save-interval 10 --frames 1000000 --lr 0.0003 --discount 0.95
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_5M_r4 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
 python -m scripts.visualize --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_5M_r4 --memory --gif LineCorridor_5M_r4
 
 python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_10M_r4 --recurrence 4 --save-interval 10 --frames 10000000 --lr 0.0003 --discount 0.95
+python -m scripts.visualize --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_10M_r4 --memory --gif LineCorridor_10M_r4
 
 
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 
-python -m scripts.train --env MiniGrid-Empty-8x8-v0 --algo ppo --model empty_8x8 --frames 800
-
-python -m torch-rl.scripts.visualize --env MiniGrid-Empty-8x8-v0 --model MiniGrid-Empty-8x8-v0_ppo_seed1_21-04-15-21-57-31
-
-python -m scripts.evaluate --env MiniGrid-Empty-8x8-v0 --model MiniGrid-Empty-8x8-v0_ppo_seed1_21-04-15-21-57-31
-
-python -m scripts.train --algo ppo --env MiniGrid-RedBlueDoors-6x6-v0 --model RedBlueDoors --recurrence 4 --save-interval 10 --frames 1000000
-
-
-python -m scripts.train --algo ppo --env MiniGrid-FourRooms-v0 --model RedBlueDoors --recurrence 4 --save-interval 20 --frames 1000000
-
-python3 -m scripts.train --algo ppo --env MiniGrid-FourRooms-v0 --model FourRooms --save-interval 10 --frames 500000
-
-python3 -m scripts.visualize --env MiniGrid-FourRooms-v0 --model RedBlueDoors
-
-python3 -m scripts.visualize --env MiniGrid-DoorKey-5x5-v0 --model DoorKey
-
-
-python3 -m scripts.evaluate --env MiniGrid-FourRooms-v0 --model FourRooms
 
 scp -r  C:\Users\handy89\mycar\data.zip handy89@@rocket.hpc.ut.ee:~/projects/donkey/mycar
 
