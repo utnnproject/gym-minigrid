@@ -29,6 +29,16 @@ python -m scripts.visualize --env MiniGrid-Customs-LineCorridor-v0 --model LineC
 python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_10M_r4 --recurrence 4 --save-interval 10 --frames 10000000 --lr 0.0003 --discount 0.95
 python -m scripts.visualize --env MiniGrid-Customs-LineCorridor-v0 --model LineCorridor_10M_r4 --memory --gif LineCorridor_10M_r4
 
+python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor25x25-v0 --model LineCorridor25x25_5M_r4 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0003 --discount 0.95
+python -m scripts.visualize --env MiniGrid-Customs-LineCorridor25x25-v0 --model LineCorridor25x25_5M_r4 --memory --gif LineCorridor25x25_5M_r4
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor25x25-v0 --model LineCorridor25x25_lr01_d85 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0001 --discount 0.85
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor25x25-v0 --model LineCorridor25x25_lr05_d85 --recurrence 4 --save-interval 10 --frames 5000000 --lr 0.0005 --discount 0.85
+
+python -m scripts.train --algo ppo --env MiniGrid-Customs-LineCorridor28x28-v0 --model LineCorridor28x28_5M_r4 --recurrence 4 --save-interval 10 --frames 10000000 --lr 0.0003 --discount 0.95
+python -m scripts.visualize --env MiniGrid-Customs-LineCorridor28x28-v0 --model LineCorridor28x28_5M_r4 --memory --gif LineCorridor28x28_5M_r4
+
 
 tensorboard --logdir=C:\gym-minigrid\stable\FourRoomsLava13x13
 

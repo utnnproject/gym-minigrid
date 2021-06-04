@@ -1172,10 +1172,10 @@ class MiniGridEnv(gym.Env):
 
         # Time Travel - travel back to x times
         elif action == self.actions.timetravel_5:
-            backward_steps = 8
+            backward_steps = 10
 
             len_history = len(self.agent_position_history)
-            if len_history >= 6:
+            if len_history >= 7:
                 if len_history  <= backward_steps:
                     self.agent_pos = self.agent_position_history[0]    
                     self.agent_dir = self.agent_direction_history[0]
