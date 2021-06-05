@@ -307,7 +307,6 @@ class LineCorridor(MiniGridEnv):
         
         return obs, reward, done, info
 
-
 class LineCorridor19x19(LineCorridor):
     def __init__(self, **kwargs):
         super().__init__(size=19, **kwargs)
@@ -319,6 +318,74 @@ class LineCorridor25x25(LineCorridor):
 class LineCorridor28x28(LineCorridor):
     def __init__(self, **kwargs):
         super().__init__(size=28, **kwargs)
+
+class OneLineCorridor(MiniGridEnv):
+    
+
+    def __init__(self, size=22, agent_pos=None, goal_pos=None, obstacle_type=None):
+        self.obstacle_type = obstacle_type
+        self._agent_default_pos = agent_pos
+        self.goal_type = 0
+
+        super().__init__(grid_size=size, max_steps=100)
+
+    def _gen_grid(self, width, height):
+        # Create the grid
+        self.grid = Grid(width, height)
+        
+        middle_height = height // 2
+        middle_widht = width // 2
+
+        self._agent_default_pos = (middle_height, middle_widht)
+
+        # random goal type
+        goalType = (self.goal_type + 1) % 2 
+        self.goal_type = goalType
+
+        if (goalType == 0):
+            goal_pos = (1, middle_height)
+        elif (goalType == 1):
+            goal_pos = (width - 2, middle_height)
+
+        
+        self._goal_default_pos = goal_pos
+
+        # Generate the surrounding walls
+        self.grid.horz_wall(0, middle_height - 1, width)
+        self.grid.horz_wall(0, middle_height + 1, width)
+        self.grid.vert_wall(0, middle_height - 1, 3)
+        self.grid.vert_wall(height - 1, middle_height - 1, 3)
+
+
+        # Randomize the player start position and orientation
+        if self._agent_default_pos is not None:
+            self.agent_pos = self._agent_default_pos
+            self.grid.set(*self._agent_default_pos, None)
+            self.agent_dir = self._rand_int(0, 4)  # assuming random start direction
+        else:
+            self.place_agent()
+
+        if self._goal_default_pos is not None:
+            goal = Goal()
+            self.put_obj(goal, *self._goal_default_pos)
+            goal.init_pos, goal.cur_pos = self._goal_default_pos
+        else:
+            self.place_obj(Goal())
+
+        
+        self.mission = (
+            "Get to the green goal square"
+        )
+
+    def step(self, action):
+        obs, reward, done, info = MiniGridEnv.step(self, action)
+        
+        return obs, reward, done, info
+
+class OneLineCorridor25x25(OneLineCorridor):
+    def __init__(self, **kwargs):
+        super().__init__(size=25, **kwargs)
+
 
 register(
     id='MiniGrid-Customs-SimpleCorridor-v0',
@@ -355,3 +422,12 @@ register(
     entry_point='gym_minigrid.envs:LineCorridor28x28'
 )
 
+register(
+    id='MiniGrid-Customs-OneLineCorridor-v0',
+    entry_point='gym_minigrid.envs:OneLineCorridor'
+)
+
+register(
+    id='MiniGrid-Customs-OneLineCorridor25x25-v0',
+    entry_point='gym_minigrid.envs:OneLineCorridor25x25'
+)
